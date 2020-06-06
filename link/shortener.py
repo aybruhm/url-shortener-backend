@@ -2,7 +2,6 @@ from string import ascii_letters, digits
 from random import choices
 
 class Shortener:
-    k = 5
 
     def __init__(self, k=None):
         self.k = k if k is not None else 5

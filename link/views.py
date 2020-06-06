@@ -1,27 +1,26 @@
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from .shortener import Shortener
 from .models import URL
 
 
-# Create your views here.
+
 def home(request):
     original_url = request.POST.get('original-url')
     link = ""
-    # print(original_url)
     if request.method == 'POST':
         if request.POST.get('original-url'):
             url = URL()
             url.original_url = request.POST.get('original-url')
-            NewUrl = url.save()
             link = Shortener().shorten()
             url.short_url = link
-            # NewUrl = url.short_url
-            NewUrl = url.save(force_insert=True)
+            url.save()
         else:
             original_url = request.POST.get('original-url')
 
     context = {
         'original_url': original_url,
+        'link': link,
     }
     return render(request, 'home.html', context)
 
@@ -30,9 +29,15 @@ def add(request):
     return render(request, 'add.html')
 
 
-def token(request):
-    pass
+def token(request, token):
+    try:
+        original_url = URL.objects.filter(short_url=token)[0]
+        original_url.visits += 1
+    except IndexError:
+        return render(request, '404.html')
+    return redirect(original_url.original_url)
 
 
 def stats(request):
-    return render(request, 'stats.html')
+    urls = URL.objects.all()
+    return render(request, 'stats.html', {'urls': urls})

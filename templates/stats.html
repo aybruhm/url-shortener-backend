@@ -1,10 +1,25 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<h1 class="logo cursive">Shortly</h1><br>
 
-<table border="1">
-  Original Url:
-  Short Url:
+<table class="table table-striped table-dark">
+  <thead class="thead-dark">
+  <tr>
+    <th>Original Url</th>
+    <th>Short Url</th>
+    <th>Visits</th>
+  </tr>
+  </thead>
+  <tbody>
+  {% for url in urls %}
+    <tr class="table-success">
+      <td>{{ url.original_url }}</td>
+      <td>127.0.0.1:8000/{{ url.short_url }}</td>
+      <td>{{ url.visits }}</td>
+    </tr>
+  {% endfor %}
+  </tbody>
 </table>
 
 {% endblock content %}

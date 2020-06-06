@@ -3,13 +3,13 @@
 {% load crispy_forms_tags %}
 
 {% block content %}
+<h1 class="logo cursive">Shortly</h1><br>
 <div class="content">
     <div class="main container text-align-content-center">
         <div class="row mt-4">
             <div class="col align-content-center">
                 <form class="form-inline" method="POST">
                     {% csrf_token %}
-                    {{ form|crispy }}
                     <input type="link" name="original-url" class="form-control mb-2 m3-sm-2 transparent"
                            placeholder="Paste Url Here..">
                     <br><br>

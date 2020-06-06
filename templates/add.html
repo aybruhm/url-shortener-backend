@@ -1,30 +1,24 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<div class="main" style="background-image: url('assets/images/default.jpg')">
-    <div class="container">
-      <h1 class="logo cursive">
-        Shortly
-      </h1><br>
-
-    <div class="container">
-        <div class="col">
-          <div class="link">
-            <h5 class="mb-2 m3-sm-2 transparent" name="long_url">{{ long_url }}</h5><br>
-            <h5 class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="copyMe">{{ link }}</h5><br>
-            <button type="button" class="btn btn-primary btn-fill" onclick="copyMyText()">Copy To Clipboard</button>
-            </div>
+<div class="container">
+    <div class="col">
+        <div class="link">
+            <h5 class="mb-2 m3-sm-2 transparent" name="long_url">Original Url: </h5><br>
+            <h5 class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="copyMe">Short Url: </h5><br>
+            <button type="button" class="btn btn-primary btn-fill" onclick="copyMyText()">Copy To Clipboard
+            </button>
         </div>
-      </div><br><br><br><br><br><br><br><br>
     </div>
+</div>
+<br><br><br><br><br><br><br><br>
+</div>
 
-    <script type="text/javascript">
+<script type="text/javascript">
       function copyMyText() {
         var textToCopy = document.getElementById("copyMe");
         textToCopy.select();
         document.execCommand("copy");
       }
-    </script>
-
-</div>
+</script>
 {% endblock content %}

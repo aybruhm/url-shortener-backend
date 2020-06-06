@@ -305,7 +305,7 @@ h1 small, h2 small, h3 small, h1 .small, h2 .small, h3 .small {
     color: #444444;
     height: 38px;
     padding: 6px 16px;
-    margin: 0px 15px;
+    margin: 15px 0px;
 }
 
 .form-control:focus {

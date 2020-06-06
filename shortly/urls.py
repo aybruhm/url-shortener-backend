@@ -21,5 +21,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', views.home, name='home'),
     path('add/', views.add, name='add'),
+    path('stats/', views.stats, name='stats'),
     path('<str:token>', views.token, name='token'),
 ]

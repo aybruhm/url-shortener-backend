@@ -1,6 +1,5 @@
-import string
-import random
-
+from string import ascii_letters, digits
+from random import choices
 
 class Shortener:
     k = 5
@@ -9,6 +8,7 @@ class Shortener:
         self.k = k if k is not None else 5
 
     def shorten(self):
-        letters = string.ascii_letters + string.digits
-        return ''.join(random.choices(letters) for i in range(self.k))
+        return ''.join(choices(ascii_letters+digits*2, k=5))
 
+# shortener = Shortener()
+# print(shortener.shorten())

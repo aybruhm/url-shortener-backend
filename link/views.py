@@ -7,14 +7,16 @@ from .models import URL
 def home(request):
     original_url = request.POST.get('original-url')
     link = ""
-    print(original_url)
+    # print(original_url)
     if request.method == 'POST':
-        if request.POST['original-url']:
-            NewUrl = original_url#.save(commit=False)
-            print(NewUrl)
+        if request.POST.get('original-url'):
+            url = URL()
+            url.original_url = request.POST.get('original-url')
+            NewUrl = url.save()
             link = Shortener().shorten()
-            NewUrl.short_url = link
-            NewUrl#.save()
+            url.short_url = link
+            # NewUrl = url.short_url
+            NewUrl = url.save(force_insert=True)
         else:
             original_url = request.POST.get('original-url')
 

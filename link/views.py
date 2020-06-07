@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
+from django.utils import timezone
 from .shortener import Shortener
 from .models import URL
 
@@ -14,10 +15,11 @@ def home(request):
             url.original_url = request.POST.get('original-url')
             link = Shortener().shorten()
             url.short_url = link
+            print(link)
             url.save()
+            return redirect('stats/')
         else:
             original_url = request.POST.get('original-url')
-
     context = {
         'original_url': original_url,
         'link': link,
@@ -26,7 +28,15 @@ def home(request):
 
 
 def add(request):
+    # link = URL.objects.filter().order_by('-timestamp')
+    # print(link)
     return render(request, 'add.html')
+
+
+def stats(request):
+    urls = URL.objects.all().order_by('-timestamp')
+    print(urls)
+    return render(request, 'stats.html', {'urls': urls})
 
 
 def token(request, token):
@@ -36,8 +46,3 @@ def token(request, token):
     except IndexError:
         return render(request, '404.html')
     return redirect(original_url.original_url)
-
-
-def stats(request):
-    urls = URL.objects.all()
-    return render(request, 'stats.html', {'urls': urls})

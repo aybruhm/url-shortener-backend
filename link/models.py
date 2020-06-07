@@ -6,7 +6,7 @@ class URL(models.Model):
     original_url = models.URLField(max_length=512)
     short_url = models.CharField(max_length=20)
     visits = models.IntegerField(default=0)
-    timestap = models.DateTimeField(default=timezone.now)
+    timestamp = models.DateTimeField(default=timezone.now)
 
     def __str__(self):
         return self.original_url

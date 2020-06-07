@@ -1,12 +1,11 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1 class="logo cursive">Shortly</h1><br>
+<h1 class="logo cursive">Shortly</h1><br><br>
 <div class="container">
     <div class="col">
         <div class="link">
-            <h5 class="mb-2 m3-sm-2 transparent" name="long_url">Original Url: </h5><br>
-            <h5 class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="copyMe">Short Url: </h5><br>
+            <h5 class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="copyMe">{{ link }}</h5><br>
             <button type="button" class="btn btn-primary btn-fill" onclick="copyMyText()">Copy To Clipboard
             </button>
         </div>
@@ -19,7 +18,7 @@
       function copyMyText() {
         var textToCopy = document.getElementById("copyMe");
         textToCopy.select();
-        document.execCommand("copy");
+        document.execCommand("Copy To Clipboard");
       }
 </script>
 {% endblock content %}

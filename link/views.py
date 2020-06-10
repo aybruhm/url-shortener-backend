@@ -17,7 +17,7 @@ def home(request):
             url.short_url = link
             print(link)
             url.save()
-            return redirect('stats/')
+            return redirect('add')
         else:
             original_url = request.POST.get('original-url')
     context = {
@@ -27,10 +27,9 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def add(request, token):
-    # link = URL.objects.filter().order_by('-timestamp')
-    # print(link)
-    return render(request, 'add.html')
+def add(request):
+    link = URL.objects.filter().last()
+    return render(request, 'add.html', {'link': link})
 
 
 def stats(request):

@@ -2,28 +2,30 @@
 
 {% block content %}
 <div class="container">
-            <div class="col-8">
-<h1 class="logo cursive">Shortly</h1><br>
+  <div class="col-8">
+    <h1 class="logo cursive">Shortly</h1><br>
 
-<table class="table table-striped table-dark">
-  <thead class="thead-dark">
-  <tr>
-    <th>Original Url</th>
-    <th>Short Url</th>
-    <th>Timestamps</th>
-    <th>Visits</th>
-  </tr>
-  </thead>
-  <tbody>
-  {% for url in urls %}
-    <tr class="table-success">
-      <td>{{ url.original_url }}</td>
-      <td>127.0.0.1:8000/{{ url.short_url }}</td>
-      <td>{{ url.timestamp }}</td>
-      <td>{{ url.visits }}</td>
-    </tr>
-  {% endfor %}
-  </tbody>
-</table>
+    <div class="container">
+      <table class="table table-striped table-dark">
+        <thead class="thead-dark">
+        <tr>
+          <th>Original Url</th>
+          <th>Short Url</th>
+          <th>Timestamps</th>
+          <th>Visits</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for url in urls %}
+          <tr class="table-success">
+            <td>{{ url.original_url }}</td>
+            <td>127.0.0.1:8000/{{ url.short_url }}</td>
+            <td>{{ url.timestamp }}</td>
+            <td>{{ url.visits }}</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
 {% endblock content %}

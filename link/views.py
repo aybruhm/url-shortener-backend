@@ -27,7 +27,7 @@ def home(request):
     return render(request, 'home.html', context)
 
 
-def add(request):
+def add(request, token):
     # link = URL.objects.filter().order_by('-timestamp')
     # print(link)
     return render(request, 'add.html')

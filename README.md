@@ -7,6 +7,6 @@ It began as a Project idea on RealPython.com and has been fully implemented by m
 #Features
 ------------------------------
 * Keeps count of how many time each URL is followed.
-* Random and String Modules implemented to generate the characters for the shortened URL.
+* Random and String Modules implemented to generate the token for the original URL.
 * A 404 page.
-* Responsive UI (Bootstrap)
+* A Stats page.

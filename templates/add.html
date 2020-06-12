@@ -5,8 +5,8 @@
 <div class="container">
     <div class="col">
         <div class="link">
-            <h5 class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="copyMe">127.0.0.1:8000/{{ link.short_url }}</h5><br>
-            <button type="button" class="btn btn-primary btn-fill" onclick="copyMyText()">Copy To Clipboard
+            <h5 class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="shortUrl">127.0.0.1:8000/{{ link.short_url }}</h5><br>
+            <button type="button" class="btn btn-primary btn-fill" onclick="copyShortUrl()">Copy To Clipboard
             </button>
         </div>
     </div>
@@ -15,10 +15,16 @@
 </div>
 
 <script type="text/javascript">
-      function copyMyText() {
-        var textToCopy = document.getElementById("copyMe");
+      function copyShortUrl() {
+          /* Select the text field */
+        var textToCopy = document.getElementById("shortUrl");
         textToCopy.select();
+        /* For Mobile devices */
+        textToCopy.setSelectionRange(0, 99999);
+        /* Copy the text inside the text field */
         document.execCommand("Copy To Clipboard");
+        /* Alert the copied text*/
+        alert("Copied the text: " + textToCopy.value);
       }
 </script>
 {% endblock content %}

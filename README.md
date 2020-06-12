@@ -27,7 +27,7 @@ To get it running on your local machine, follow the steps below:
 git clone https://github.com/israelvictory/URI-Shortener.git
 ```
 
-2. change directory to diary:
+2. Change directory to diary:
 
 ```
 cd URI-Shortener/shortly

@@ -2,13 +2,12 @@
 
 {% block content %}
 <div class="container">
-  <div class="col-8">
     <h1 class="logo cursive">Shortly</h1>
-    <br>
+    <br><br>
 
-    <div class="container">
+    <div class="container" style="padding-right: 100px;">
       <table class="table table-bordered table-dark" style="color: white">
-        <thead class="thead-dark">
+        <thead class="thead-dark" style="font-size: 20px;">
         <tr>
           <th>Original Url</th>
           <th>Short Url</th>
@@ -18,9 +17,9 @@
         </thead>
         <tbody>
         {% for url in urls %}
-          <tr class="table-success">
+          <tr class="table-success" style="font-size: 15px;">
             <td>{{ url.original_url }}</td>
-            <td>127.0.0.1:8000/{{ url.short_url }}</td>
+            <td><a href="{{ url.original_url }}" style="color: #FF3B30;">127.0.0.1:8000/{{ url.short_url }}</a></td>
             <td>{{ url.timestamp }}</td>
             <td>{{ url.visits }}</td>
           </tr>

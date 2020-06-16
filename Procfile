@@ -1,1 +1,1 @@
-web: gunicorn shortly.wsgi --log-file -
+web: gunicorn 20.wsgi --log-file -

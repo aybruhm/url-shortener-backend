@@ -22,6 +22,8 @@ The interface is as shown:
 <br>
 To get it running on your local machine, follow the steps below:
 
+<br>
+<br>
 1. Run the commands below in your terminal:
 
 ```

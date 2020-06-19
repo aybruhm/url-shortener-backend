@@ -21,17 +21,17 @@ def home(request):
     context = {
         'original_url': original_url,
     }
-    return render(request, 'home.html', context)
+    return render(request, 'link/home.html', context)
 
 
 def add(request):
     link = URL.objects.filter().last()
-    return render(request, 'add.html', {'link': link})
+    return render(request, 'link/add.html', {'link': link})
 
 
 def stats(request):
     urls = URL.objects.all().order_by('-timestamp')
-    return render(request, 'stats.html', {'urls': urls})
+    return render(request, 'link/stats.html', {'urls': urls})
 
 
 def token(request, token):
@@ -39,5 +39,5 @@ def token(request, token):
         original_url = URL.objects.filter(short_url=token)[0]
         original_url.visits += 1
     except IndexError:
-        return render(request, '404.html')
+        return render(request, 'link/404.html')
     return redirect(original_url.original_url)

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+    content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <meta name="description" content="">
+  <meta name="keywords" content="">
+  <link rel="stylesheet" href="assets/css/bootstrap.css">
+  <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+  <link href="http://netdna.bootstrapcdn.com/font-awesome/7.1.0/css/font-awesome.css" rel="stylesheet">
+  <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
+  <title>Home - Shortly</title>
+</head>
+
+<body>
+
+  <div class="main" style="background-position: relative; background-image: url('assets/images/default.jpg')">
+
+    <h1 class="logo cursive">Shortly</h1><br><br>
+    <div class="container">
+      <div class="col">
+        <div class="link">
+          <input class="form-control m3-md-2  transparent" name="short_url" id="shortUrl"
+            style="font-size: 18px; text-align: center;" value="short.ly/4Xgs5S"><br>
+          <button type="button" class="btn btn-danger btn-fill" id="shortUrl" onclick="copyShortUrl()">Copy</button>
+        </div>
+      </div>
+    </div>
+    <br><br><br><br><br><br><br><br>
+  </div>
+
+  <script type="text/javascript">
+    function copyShortUrl() {
+      /* Select the text field */
+      var textToCopy = document.getElementById("shortUrl");
+      textToCopy.select();
+      /* For Mobile devices */
+      textToCopy.setSelectionRange(0, 99999);
+      /* Copy the text inside the text field */
+      document.execCommand("Copied!");
+      /* Alert the copied text*/
+      alert("Copied the text: " + textToCopy.value);
+    }
+  </script>
+
+  <script src="assets/js/jquery-1.10.2.js" charset="utf-8"></script>
+  <script src="assets/js/bootstrap.min.js" charset="utf-8"></script>
+</body>
+
+</html>

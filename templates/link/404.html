@@ -1,31 +1,13 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <link rel="stylesheet" href="assets/css/bootstrap.css">
-    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
-    <link href="http://netdna.bootstrapcdn.com/font-awesome/7.1.0/css/font-awesome.css" rel="stylesheet">
-    <link href='http://fonts.googleapis.com/css?family=Grand+Hotel' rel='stylesheet' type='text/css'>
-    <title>404 - Shortly</title>
-</head>
-
-<body>
-    <div class="main" style="background-position: relative; background-image: url('assets/images/default.jpg')">
-
+{% block content %}
+    <div class="container"><br><br>
+        <h1 style="text-align: center;">404: Page Not Found!</h1><br>
         <div class="container">
-            <h1 class="logo cursive">404: Page Not Found!</h1><br>
             <hr>
-            <p class="cursive" style="font-size: 23px; color: white;">Although there could be a million reasons why you
+            <p class="cursive" style="font-size: 23px; color: black;">Although there could be a million reasons why you
                 got this page, here are the top 5
                 reasons we couldn't process what you were looking for:
             </p>
-            <ul class="cursive" style="color: white; font-size: 15.9px">
+            <ul class="cursive" style="color: black; font-size: 15.9px">
                 <li>The page doesn't exist.</li>
                 <li>The page you thought exists does in face exist, but you typed the wrong url.</li>
                 <li>You typed the wrong url on purpose.</li>
@@ -34,15 +16,10 @@
             </ul>
             <hr>
         </div>
-
-        <div class="container" style="color: white; text-align: center;">
-            <h3 class="cursive" style="font-size: 20px">Click <a href="/index.htm" class="btn btn-primary">Here</a> to head back home.</h3>
-        </div>
-        <br><br><br><br>
     </div>
 
-    <script src="assets/js/jquery-1.10.2.js" charset="utf-8"></script>
-    <script src="assets/js/bootstrap.min.js" charset="utf-8"></script>
-</body>
-
-</html>
+    <div class="container" style="color: black; text-align: center;">
+        <h3 class="cursive" style="font-size: 20px">Click <a href="{% url 'home' %}" class="btn btn-primary" style="text-decoration: none;">Here</a> to head back home.</h3>
+    </div>
+    <br><br>
+{% endblock %}

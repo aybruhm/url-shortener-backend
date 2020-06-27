@@ -3,11 +3,6 @@
 This is a URL shortening application built using Django. 
 It began as a Project idea on RealPython.com and has been fully implemented by me.🙂
 
-<br>
-The interface is as shown:
-
-![shortly](README-images/shortly.PNG)
-
 
 <br>
 

@@ -3,8 +3,8 @@
 {% block content %}
 
     <div class="container" style="padding-right: 100px;">
-      <table class="table table-bordered table-dark" style="color: white">
-        <thead class="thead-dark" style="font-size: 20px;">
+      <table class="table">
+        <thead>
         <tr>
           <th>Original Url</th>
           <th>Short Url</th>
@@ -14,7 +14,7 @@
         </thead>
         <tbody>
         {% for url in urls %}
-          <tr class="table-success" style="font-size: 15px;">
+          <tr>
             <td>{{ url.original_url }}</td>
             <td><a href="{{ url.original_url }}" style="color: #FF3B30;">127.0.0.1:8000/{{ url.short_url }}</a></td>
             <td>{{ url.timestamp }}</td>
@@ -24,5 +24,5 @@
         </tbody>
       </table>
     </div>
-
+<br><br><br>
 {% endblock content %}

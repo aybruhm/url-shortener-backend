@@ -1,10 +1,6 @@
 {% extends 'base.html' %}
 
 {% block content %}
-    <div class="container">
-    
-    <h5 class="cursive" style="font-size: 30px; color: white; text-align: center;">Create Click-Worthy Links</h5>
-
 
     <div class=" container">
         <div class="row mt-2">
@@ -13,7 +9,7 @@
                     {% csrf_token %}
                     <input type="link" name="original-url" class="form-control mb-2 m3-sm-2 transparent"
                            placeholder="Paste Url Here..">
-                    <button type="submit" name="button" class="btn btn-danger btn-fill">Submit</button>
+                    <button type="submit" name="button" class="btn btn-md btn-danger btn-fill">Submit</button>
                 </form>
                 <br>
             </div>

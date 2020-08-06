@@ -5,7 +5,6 @@ from .shortener import Shortener
 from .models import URL
 
 
-
 def home(request):
     original_url = request.POST.get('original-url')
     if request.method == 'POST':

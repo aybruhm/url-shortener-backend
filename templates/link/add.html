@@ -1,30 +1,18 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<br>
-    <div class="col">
-        <div class="link">
-            <input class="form-control mb-2 m3-sm-2 transparent" name="short_url" id="shortUrl" style="font-size: 18px; text-align: center;" value="shortly-20.herokuapp.com/{{ link.short_url }}">
-            <br>
-            <button type="button" class="btn btn-md btn-danger btn-fill" id="shortUrl" onclick="copyShortUrl()">Copy</button>
-        </div>
+<section id="add" style="padding-top: 200px">
+    <div class="main" style="font-family: 'Grand Hotel',cursive;">
+        <h1 class="logo cursive text" style="color: #fff; font-size: 82px; text-align: center;">Shortly</h1>
+            <div class="container">
+                <div class="col">
+                    <div class="link">
+                        <input class="form-control link m3-md-2 text-center transparent tr-text-2" name="short_url" id="shortUrl" value="shortly-20.herokuapp.com/{{ link.short_url }}"><br>
+                        <button type="submit" name="button" class="btn btn-danger btn-fill button" id="shortUrl" onclick="copyShortUrl()">Copy</button>
+                    </div>
+                </div>
+            </div>
     </div>
-</div>
-<br><br><br><br><br><br><br><br>
-</div>
 
-<script type="text/javascript">
-      function copyShortUrl() {
-          /* Select the text field */
-        var textToCopy = document.getElementById("shortUrl");
-        textToCopy.select();
-        /* For Mobile devices */
-        textToCopy.setSelectionRange(0, 99999);
-        /* Copy the text inside the text field */
-        document.execCommand("Copied!");
-        /* Alert the copied text*/
-        alert("Copied the text: " + textToCopy.value);
-      }
-</script>
-
+</section>
 {% endblock content %}

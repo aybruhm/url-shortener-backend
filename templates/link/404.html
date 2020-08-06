@@ -1,25 +1,23 @@
 {% block content %}
-    <div class="container"><br><br>
-        <h1 style="text-align: center;">404: Page Not Found!</h1><br>
+<section id="page-not-found">
+    <div class="main">
         <div class="container">
+            <h1 class="logo cursive">404: Page Not Found!</h1><br>
             <hr>
-            <p class="cursive" style="font-size: 23px; color: black;">Although there could be a million reasons why you
-                got this page, here are the top 5
-                reasons we couldn't process what you were looking for:
-            </p>
-            <ul class="cursive" style="color: black; font-size: 15.9px">
-                <li>The page doesn't exist.</li>
-                <li>The page you thought exists does in face exist, but you typed the wrong url.</li>
-                <li>You typed the wrong url on purpose.</li>
-                <li>The website you're coming from is not as advance as shortly and could not not keep up with out super
-                    content management system.</li>
-            </ul>
+            <p class="cursive" style="font-size: 23px; color: white;">Although there could be a million reasons why you got this page, here are the top 5 reasons we couldn't process what you were looking for: </p>
+                <ul class="cursive list-text">
+                    <li>The page doesn't exist.</li>
+                    <li>The page you thought exists does in face exist, but you typed the wrong url.</li>
+                    <li>You typed the wrong url on purpose.</li>
+                    <li>The website you're coming from is not as advance as shortly and could not not keep up with out super content management system.</li>
+                </ul>
             <hr>
         </div>
-    </div>
 
-    <div class="container" style="color: black; text-align: center;">
-        <h3 class="cursive" style="font-size: 20px">Click <a href="{% url 'home' %}" class="btn btn-primary" style="text-decoration: none;">Here</a> to head back home.</h3>
+        <div class="container text-center">
+            <h3 class="cursive">Click <a href="{% url 'home' %}" class="rd">Here</a> to head back home.</h3>
+        </div>
+
     </div>
-    <br><br>
+</section>
 {% endblock %}

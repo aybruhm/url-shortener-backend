@@ -5,9 +5,9 @@ Home - Shortly
 {% endblock title %}
 
 {% block content %}
-
-   <div class="main">
-        <h1 class="logo cursive text-center">
+<section id="main" style="padding-top: 200px">
+   <div class="main" style="font-family: 'Grand Hotel',cursive;">
+        <h1 class="logo cursive text-center" style="font-size: 82px;">
             Shortly
         </h1>
         <h3 class="col alight-content-center text-center ccwl">
@@ -16,13 +16,14 @@ Home - Shortly
             <div class="container">
                 <div class="row mt-2">
                     <div class="col">
-                        <form class="form-inline" method="POST" action="add.htm">
+                        <form class="form-inline" method="POST">
                             {% csrf_token %}
-                            <input type="link" name="original-url" class="form-control mb-2 m3-sm-2 transparent" placeholder="Paste Url Here..">
+                            <input type="link" name="original-url" class="form-control mb-2 m3-sm-2 transparent" placeholder="Paste Url Here.." style="width: 100%; transition: all 300ms linear; margin: inherit; background-color: rgba(255, 255, 255, 0.07); border: 1px solid rgba(238, 238, 238, 0.27);">
                             <button type="submit" name="button" class="btn btn-danger btn-fill button">Submit</button>
                         </form>
                 </div>
                     </div>
             </div>
     </div>
+</section>
 {% endblock %}

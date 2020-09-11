@@ -37,6 +37,7 @@ def token(request, token):
     try:
         original_url = URL.objects.filter(short_url=token)[0]
         original_url.visits += 1
+        original_url.save()
     except IndexError:
         return render(request, 'link/404.html')
     return redirect(original_url.original_url)

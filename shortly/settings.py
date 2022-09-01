@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
+from decouple import config
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -24,7 +25,11 @@ SECRET_KEY = 'kyiln6d6pam00^61dyzs*bz^7e$sb1oio4h8f(mda4p-$i-6)*'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
 
-ALLOWED_HOSTS = ['shortly-20.herokuapp.com', '127.0.0.1', 'web-production-04d4.up.railway.app']
+ALLOWED_HOSTS = [
+    'shortly-api.abram.tech', 
+    '127.0.0.1', 
+    'web-production-04d4.up.railway.app'
+]
 
 
 # Application definition
@@ -36,7 +41,13 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # local apps
     'link.apps.LinkConfig',
+    
+    # third party apps
+    'rest_framework',
+    'corsheaders',
 ]
 
 
@@ -44,11 +55,21 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
+    
+    # cors headers middleware
+    "corsheaders.middleware.CorsMiddleware",
+    
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+# allowed origins 
+CORS_ALLOWED_ORIGINS = [
+    "https://shortly.abram.tech",
+    "http://localhost:3000",
 ]
 
 ROOT_URLCONF = 'shortly.urls'
@@ -94,13 +115,6 @@ DATABASES = {
     }
 
 }
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.sqlite3',
-#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#     }
-# }
 
 
 # Password validation

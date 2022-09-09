@@ -13,5 +13,5 @@ class URLSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = URL
-        fields = ("original_url", "short_url")
+        fields = ("original_url", "short_url", "visits", "timestamp")
         

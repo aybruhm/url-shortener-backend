@@ -7,6 +7,10 @@ class URL(models.Model):
     short_url = models.CharField(max_length=20)
     visits = models.IntegerField(default=0)
     timestamp = models.DateTimeField(default=timezone.now)
+    
+    class Meta:
+        verbose_name_plural = "URLs"
+        db_table = "urls"
 
     def __str__(self):
-        return self.original_url
+        return self.short_url

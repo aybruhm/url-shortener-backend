@@ -1,36 +1,74 @@
+# Django Imports
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
-from django.utils import timezone
+
 from .shortener import Shortener
-from .models import URL
+
+# Native Imports
+from string import ascii_letters, digits
+from random import choices
+
+# Rest Framework Imports
+from rest_framework.views import APIView
+from rest_framework.response import Response
+from rest_framework.request import Request
+from rest_framework import status
+
+# YASG Imports
+from drf_yasg.utils import swagger_auto_schema
+
+# Own Imports
+from link.models import URL
+from link.serializers import URLSerializer
+
+# Third Libraries Imports
+from rest_api_payload import success_response, error_response
 
 
-def home(request):
-    original_url = request.POST.get('original-url')
-    if request.method == 'POST':
-        if request.POST.get('original-url'):
-            url = URL()
-            url.original_url = request.POST.get('original-url')
-            link = Shortener().shorten()
-            url.short_url = link
+class ShortenURL(APIView):
+    serializer_class = URLSerializer
+    no_of_characters = 5
+    
+    def shorten_url(self):
+        shrtn_url =  ''.join(
+            choices(
+                ascii_letters+digits*2, 
+                k=self.no_of_characters
+            )
+        )
+        return shrtn_url
+    
+    @swagger_auto_schema(request_body=serializer_class)
+    def post(self, request:Request) -> Response:
+        serializer = self.serializer_class(data=request.data)
+        
+        if serializer.is_valid():
+            original_url = serializer.validated_data.get("original_url")
+            
+            # get url or create one
+            url, _ = URL.objects.get_or_create(original_url=original_url)
+            # shortens original url to short_url
+            url.short_url = self.shorten_url()
+            # save url object
             url.save()
-            return redirect('add')
-        else:
-            original_url = request.POST.get('original-url')
-    context = {
-        'original_url': original_url,
-    }
-    return render(request, 'link/home.html', context)
+            
+            payload = success_response(
+                status=True, 
+                message="Url shortended!",
+                data=serializer.data
+            )
+            return Response(data=payload, status=status.HTTP_201_CREATED)
+        
+        payload = error_response(
+            status=False,
+            message=serializer.errors
+        )
+        return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
 
 
 def add(request):
     link = URL.objects.filter().last()
     return render(request, 'link/add.html', {'link': link})
 
-
-def stats(request):
-    urls = URL.objects.all().order_by('-timestamp')
-    return render(request, 'link/stats.html', {'urls': urls})
 
 
 def token(request, token):

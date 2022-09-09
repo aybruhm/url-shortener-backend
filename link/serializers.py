@@ -5,8 +5,13 @@ from rest_framework import serializers
 from link.models import URL
 
 
+class ShortenURLSerializer(serializers.Serializer):
+    original_url = serializers.URLField(required=True)
+    
+
 class URLSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = URL
-        fields = ["original_url"]
+        fields = ("original_url", "short_url")
+        

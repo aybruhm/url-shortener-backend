@@ -30,10 +30,11 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     
     # backend path
-    path('', views.home, name='home'),
+    # path('', views.home, name='home'),
     path('<str:token>', views.token, name='token'),
     
     # api endpoints
+    path("api/", include("link.urls")),
     
     # api documentation endpoints
     re_path(r'^generate_api_documentation(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),

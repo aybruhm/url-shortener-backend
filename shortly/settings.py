@@ -10,17 +10,19 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
+from pathlib import Path
 from decouple import config
 
-# Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'kyiln6d6pam00^61dyzs*bz^7e$sb1oio4h8f(mda4p-$i-6)*'
+SECRET_KEY = config("SECRET_KEY")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -40,6 +42,9 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+    
+    # whitenose
+    "whitenoise.runserver_nostatic",
     'django.contrib.staticfiles',
     
     # local apps
@@ -53,7 +58,10 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
+    # whitenoise middleware
+    "whitenoise.middleware.WhiteNoiseMiddleware",
+    
     'django.contrib.sessions.middleware.SessionMiddleware',
     
     # cors headers middleware
@@ -69,8 +77,12 @@ MIDDLEWARE = [
 # allowed origins 
 CORS_ALLOWED_ORIGINS = [
     "https://shortly.abram.tech",
-    "http://localhost:3000",
+    "http://localhost:8080",
 ]
+
+SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
 
 ROOT_URLCONF = 'shortly.urls'
 
@@ -97,23 +109,10 @@ WSGI_APPLICATION = 'shortly.wsgi.application'
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-
-    'default': {
-
-        'ENGINE': 'django.db.backends.postgresql',
-
-        'NAME': 'd100lhvi6apmet',
-
-        'USER': 'sftxppxupnkujl',
-
-        'PASSWORD': '947c86a31f0f56d20a3c221e80894f578daadc67e9d4b79ec26f7980cf7d1833',
-
-        'HOST': 'ec2-54-197-254-117.compute-1.amazonaws.com',
-
-        'PORT': 5432,
-
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3", 
+        "NAME": BASE_DIR / "db.sqlite3"
     }
-
 }
 
 
@@ -153,6 +152,11 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+STATIC_URL = "/static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
-STATIC_URL = "/static/"
+
+# Default primary key field type
+# https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
+
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"

@@ -1,5 +1,6 @@
 # Django Imports
 from django.shortcuts import render, redirect
+from django.db.models import F
 
 from .shortener import Shortener
 
@@ -18,13 +19,14 @@ from drf_yasg.utils import swagger_auto_schema
 
 # Own Imports
 from link.models import URL
-from link.serializers import URLSerializer
+from link.serializers import URLSerializer, ShortenURLSerializer
 
 # Third Libraries Imports
 from rest_api_payload import success_response, error_response
 
 
 class ShortenURL(APIView):
+    short_url_serializer_class = ShortenURLSerializer
     serializer_class = URLSerializer
     no_of_characters = 5
     
@@ -37,9 +39,9 @@ class ShortenURL(APIView):
         )
         return shrtn_url
     
-    @swagger_auto_schema(request_body=serializer_class)
+    @swagger_auto_schema(request_body=short_url_serializer_class)
     def post(self, request:Request) -> Response:
-        serializer = self.serializer_class(data=request.data)
+        serializer = self.short_url_serializer_class(data=request.data)
         
         if serializer.is_valid():
             original_url = serializer.validated_data.get("original_url")
@@ -54,7 +56,7 @@ class ShortenURL(APIView):
             payload = success_response(
                 status=True, 
                 message="Url shortended!",
-                data=serializer.data
+                data=self.serializer_class(url).data
             )
             return Response(data=payload, status=status.HTTP_201_CREATED)
         
@@ -63,19 +65,28 @@ class ShortenURL(APIView):
             message=serializer.errors
         )
         return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+    
+
+class GetOriginalURl(APIView):
+    
+    def get(self, request:Request, token:str) -> Response:
+        
+        try:
+            url = URL.objects.filter(short_url=token).first()
+            url.visits = F("visits") + 1
+            url.save()
+        except (URL.DoesNotExist, Exception):
+            payload = error_response(
+                status=False,
+                message="URL does not exist!"
+            )
+            return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
+        
+        payload = success_response(
+            status=True,
+            message="URL retrieved!",
+            data={}
+        )
+        return Response(data=payload, status=status.HTTP_200_OK)
 
 
-def add(request):
-    link = URL.objects.filter().last()
-    return render(request, 'link/add.html', {'link': link})
-
-
-
-def token(request, token):
-    try:
-        original_url = URL.objects.filter(short_url=token)[0]
-        original_url.visits += 1
-        original_url.save()
-    except IndexError:
-        return render(request, 'link/404.html')
-    return redirect(original_url.original_url)

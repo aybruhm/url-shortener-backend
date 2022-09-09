@@ -31,7 +31,6 @@ urlpatterns = [
     
     # backend path
     # path('', views.home, name='home'),
-    path('<str:token>', views.token, name='token'),
     
     # api endpoints
     path("api/", include("link.urls")),

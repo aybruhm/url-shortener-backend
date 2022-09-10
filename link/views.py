@@ -59,7 +59,7 @@ class ShortenURL(APIView):
             payload = success_response(
                 status=True, 
                 message="Url shortended!",
-                data=self.serializer_class(url).data
+                data=self.serializer_class(url, context={'request': request}).data
             )
             return Response(data=payload, status=status.HTTP_201_CREATED)
         
@@ -83,7 +83,7 @@ class URLStats(APIView):
         :return: A list of URLs
         """
         urls = URL.objects.all()
-        serializer = self.serializer_class(urls, many=True)
+        serializer = self.serializer_class(urls, many=True, context={'request': request})
         
         payload = success_response(
             status=True, 
@@ -95,6 +95,7 @@ class URLStats(APIView):
 
 class GetOriginalURl(APIView):
     permission_classes = (permissions.AllowAny, )
+    serializer_class = URLSerializer
     
     def get(self, request:Request, token:str) -> Response:
         """
@@ -113,6 +114,7 @@ class GetOriginalURl(APIView):
             url = URL.objects.filter(short_url=token).first()
             url.visits = F("visits") + 1
             url.save()
+            
         except (URL.DoesNotExist, Exception):
             payload = error_response(
                 status=False,
@@ -123,6 +125,6 @@ class GetOriginalURl(APIView):
         payload = success_response(
             status=True,
             message="URL retrieved!",
-            data={}
+            data=self.serializer_class(url, context={'request': request}).data
         )
         return Response(data=payload, status=status.HTTP_200_OK)

@@ -1,4 +1,5 @@
 # Django Imports
+from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render
 from django.db.models import F
 
@@ -21,6 +22,10 @@ from link.serializers import URLSerializer, ShortenURLSerializer
 
 # Third Libraries Imports
 from rest_api_payload import success_response, error_response
+
+
+def shortly_backend_home(request:HttpRequest) -> HttpResponse:
+    return render(request, "shortener/home.html")
 
 
 class ShortenURL(APIView):

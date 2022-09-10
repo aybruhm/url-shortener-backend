@@ -18,7 +18,7 @@ schema_view = get_schema_view(
    openapi.Info(
       title="URL Shortener",
       default_version='v1',
-      description="A url shortening backend built with Python (Django and Django Rest Framework).",
+      description="A url shortening service built with Python (Django and Django Rest Framework).",
       contact=openapi.Contact(email="israelvictory87@gmail.com"),
       license=openapi.License(name="CC0-1.0 license"),
    ),

@@ -30,7 +30,7 @@ urlpatterns = [
    path('admin/', admin.site.urls),
    
    # backend path
-   path('', views.home, name='home'),
+   path('', views.shortly_backend_home, name='home'),
    path('<str:shortened_url>/', views.redirect_shortened_url, name="redirect-shortened-url"),
    
    # api endpoints

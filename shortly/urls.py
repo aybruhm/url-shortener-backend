@@ -27,17 +27,18 @@ schema_view = get_schema_view(
 )
 
 urlpatterns = [
-    path('admin/', admin.site.urls),
-    
-    # backend path
-    # path('', views.home, name='home'),
-    
-    # api endpoints
-    path("api/", include("link.urls")),
-    
-    # api documentation endpoints
-    re_path(r'^generate_api_documentation(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
-    re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
+   path('admin/', admin.site.urls),
+   
+   # backend path
+   path('', views.home, name='home'),
+   path('<str:shortened_url>/', views.redirect_shortened_url, name="redirect-shortened-url"),
+   
+   # api endpoints
+   path("api/", include("link.urls")),
+   
+   # api documentation endpoints
+   re_path(r'^generate_api_documentation(?P<format>\.json|\.yaml)$', schema_view.without_ui(cache_timeout=0), name='schema-json'),
+   re_path(r'^docs/$', schema_view.with_ui('swagger', cache_timeout=0), name='schema-swagger-ui'),
 ]
 
 if settings.DEBUG:

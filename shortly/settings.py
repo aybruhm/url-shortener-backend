@@ -79,6 +79,7 @@ MIDDLEWARE = [
 CORS_ALLOWED_ORIGINS = [
     "https://shortly.abram.tech",
     "http://localhost:8080",
+    "https://bientot.netlify.app",
 ]
 
 SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')

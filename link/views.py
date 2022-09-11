@@ -1,5 +1,5 @@
 # Django Imports
-from django.http import HttpRequest, HttpResponse
+from django.http import HttpRequest, HttpResponse, Http404, HttpResponseRedirect
 from django.shortcuts import render
 from django.db.models import F
 
@@ -28,7 +28,26 @@ def shortly_backend_home(request:HttpRequest) -> HttpResponse:
     return render(request, "shortener/home.html")
 
 
-class ShortenURL(APIView):
+def redirect_shortened_url(request:HttpRequest, shortened_url:str) -> HttpResponseRedirect:
+    """
+    It takes a request and a shortened URL, and returns a redirect to the original URL
+    
+    :param request: This is the request object that is passed to the view
+    :type request: HttpRequest
+    :param shortened_url: The shortened URL that was passed in the URL
+    :type shortened_url: str
+    :return: HttpResponseRedirect
+    """
+    
+    try:
+        url = URL.objects.filter(short_url=shortened_url).first()
+    except (URL.DoesNotExist, Exception):
+        raise Http404
+    
+    return HttpResponseRedirect(redirect_to=url.original_url)
+
+
+class ShortenURLAPIView(APIView):
     permission_classes = (permissions.AllowAny, )
     short_url_serializer_class = ShortenURLSerializer
     serializer_class = URLSerializer
@@ -75,7 +94,7 @@ class ShortenURL(APIView):
         return Response(data=payload, status=status.HTTP_400_BAD_REQUEST)
     
 
-class URLStats(APIView):
+class URLStatsAPIView(APIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = URLSerializer
     
@@ -98,7 +117,7 @@ class URLStats(APIView):
         return Response(data=payload, status=status.HTTP_200_OK)
     
 
-class GetOriginalURl(APIView):
+class GetOriginalURLAPIView(APIView):
     permission_classes = (permissions.AllowAny, )
     serializer_class = URLSerializer
     

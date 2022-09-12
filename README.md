@@ -1,11 +1,13 @@
-# Django-URI-Shortener
+# URL Shortener
 
 Build and protect your brand using powerful, recognizable short links. It is built with Python and Django Rest Framework.
 
-# Docs
+## Docs
 
+## Frontend
+Link to [repository](https://github.com/israelabraham/url-shortener-frontend)
 
-# Features
+## Features
 
 - Keeps count of how many times each URL is followed.
 - Random and String Modules were implemented to generate the token for the original URL.
